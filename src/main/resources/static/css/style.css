@@ -16,11 +16,13 @@ html {
 #content {
     width: 40%;
     margin: auto;
-    font-size: 24px;
-    /*text-align: center;*/
+    height: 80%;
+
 }
-.todo{
+
+.todo {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .checkbox {
@@ -33,7 +35,26 @@ html {
     background-color: #fff;
     transition: 0.2s;
 }
-.descprition{
-    font-size: 22px;
-    margin-left: 5px;
+
+.taskName {
+    font-size: 24px;
+    margin-left: 10px;
+    width: calc(100% - 36px);
 }
+
+.descprition {
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top: 4px;
+    margin-bottom: 15px;
+}
+
+/*.tick{*/
+/*    background-color: #fff;*/
+/*    opacity: 0;*/
+/*}*/
+/*.tick:hover{*/
+/*    opacity: 1;*/
+/*    transition: 0.2s;*/
+/*}*/
+
