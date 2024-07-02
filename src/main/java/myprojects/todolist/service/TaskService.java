@@ -7,6 +7,8 @@ import myprojects.todolist.model.Task;
 import myprojects.todolist.repository.TasksRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Getter
@@ -16,5 +18,11 @@ public class TaskService {
 
     public void saveTask(Task task){
         tasksRepository.save(task);
+    }
+    public List<Task> findAll(){
+        return tasksRepository.findAll();
+    }
+    public boolean isDataBaseEmpty(){
+        return tasksRepository.count() == 0;
     }
 }
