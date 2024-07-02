@@ -11,12 +11,15 @@
         <h1>TO DO LIST</h1>
     </div>
     <div id="content">
-        <div class="todo">
+        <div class="todo" th:each="task : ${tasks}">
             <div class="checkbox"></div>
-            <div class="taskName">taskName lorem impsum</div>
-            <div class="descprition">description lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum lorem impsum</div>
+            <div class="taskName" th:text="${task.name}"></div>
+            <div class="descprition" th:text="${task.description}"></div>
         </div>
     </div>
+    <button onclick="addTask()">ADD NEW TASK</button>
 </div>
+<script src="../js/stars.js"></script>
+<script src="../js/script.js"></script>
 </body>
 </html>

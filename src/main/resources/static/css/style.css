@@ -1,23 +1,30 @@
 html {
-    background-color: #000;
+    background-color: #020213;
     color: #fff;
+    overflow-y: hidden;
 }
 
-/*#container{*/
-/*    margin: auto;*/
-/*    align-items: center;*/
-/*}*/
+body {
+    margin: 0;
+}
+
+#container {
+    width: 40%;
+    margin: 0 auto;
+}
+
 #header {
     text-align: center;
     font-size: 30px;
     height: 20%;
+    background-color: #000;
 }
 
 #content {
-    width: 40%;
     margin: auto;
-    height: 80%;
-
+    height: 65vh;
+    background-color: #000;
+    overflow-y: scroll;
 }
 
 .todo {
@@ -46,7 +53,7 @@ html {
     font-size: 18px;
     margin-left: 40px;
     margin-top: 4px;
-    margin-bottom: 15px;
+    margin-bottom: 7px;
 }
 
 /*.tick{*/
@@ -58,3 +65,58 @@ html {
 /*    transition: 0.2s;*/
 /*}*/
 
+.star {
+    border-radius: 50%;
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: white;
+    border: 1px solid black;
+    z-index: -1;
+}
+
+button {
+    margin: 15px 5%;
+    width: 90%;
+    padding: 8px;
+    border: #fff 3px solid;
+    color: #fff;
+    border-radius: 15px;
+    background-color: #000;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #000;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+#footer {
+    background-color: #000;
+    color: #fff;
+    font-size: 10px;
+    width: 100%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-bottom: 0;
+}
+#nameInput{
+    margin-left: 5%;
+    padding: 4px;
+    border-radius: 15px;
+    border: solid yellow 3px;
+    margin-bottom: 15px;
+    width: 60%;
+    font-size: 24px;
+}
+#descriptionInput{
+    margin-left: 5%;
+    width: 90%;
+    height: 40vh;
+    padding: 4px;
+    border: solid yellow 3px;
+    border-radius: 15px;
+    font-size: 16px;
+}

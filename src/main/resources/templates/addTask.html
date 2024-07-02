@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new task to TODO</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <h1>TO DO LIST</h1>
+    </div>
+    <div id="content">
+        <button onclick="back()">BACK to TODO</button>
+        <form method="post" th:action="@{/addTask}">
+            <input id="nameInput" name="name" placeholder="Topic" type="text">
+            <textarea id="descriptionInput" type="text" placeholder="Description" name="description"></textarea>
+            <button type="submit">ADD TASK</button>
+        </form>
+    </div>
+</div>
+<script src="../js/stars.js"></script>
+<script src="../js/script.js"></script>
+</body>
+</html>
