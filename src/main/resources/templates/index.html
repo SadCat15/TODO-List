@@ -11,8 +11,8 @@
         <h1>TO DO LIST</h1>
     </div>
     <div id="content">
-        <div class="todo" th:each="task : ${tasks}">
-            <div class="checkbox"></div>
+        <div class="todo" th:each="task : ${tasks}" th:data-set="${task.id}">
+            <div class="checkbox" th:data-argument="${task.id}" onclick="deleteTask(this)"></div>
             <div class="taskName" th:text="${task.name}"></div>
             <div class="descprition" th:text="${task.description}"></div>
         </div>
