@@ -25,4 +25,13 @@ public class TaskService {
     public boolean isDataBaseEmpty(){
         return tasksRepository.count() == 0;
     }
+    public void deleteStartTask(){
+        if (tasksRepository.findById(1L).isPresent()) {
+            tasksRepository.deleteById(1L);
+        }
+    }
+    public void createStartTask(){
+        Task task = new Task("Make Your first task", "Click on ADD NEW TASK to create a new task");
+        saveTask(task);
+    }
 }

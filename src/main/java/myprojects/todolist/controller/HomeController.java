@@ -18,6 +18,9 @@ public class HomeController {
 
     @GetMapping("/")
     private String index(Model model) {
+        if(taskService.isDataBaseEmpty()){
+            taskService.createStartTask();
+        }
         model.addAttribute("tasks", taskService.findAll());
         return "index";
     }
@@ -31,6 +34,7 @@ public class HomeController {
     private String createTask(@RequestParam("name") String name, @RequestParam("description") String  description) {
         Task task = new Task(name, description);
         taskService.saveTask(task);
+        taskService.deleteStartTask();
         return "redirect:/";
     }
 }
