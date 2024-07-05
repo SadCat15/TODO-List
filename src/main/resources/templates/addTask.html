@@ -11,9 +11,9 @@
         <h1>TO DO LIST</h1>
     </div>
     <div id="content">
-        <button onclick="back()">BACK to TODO</button>
+        <button onclick="back()">BACK to TASKS</button>
         <form method="post" th:action="@{/addTask}">
-            <input id="nameInput" name="name" placeholder="Topic" type="text">
+            <input id="nameInput" name="name" placeholder="Main goal" type="text">
             <textarea id="descriptionInput" type="text" placeholder="Description" name="description"></textarea>
             <button type="submit">ADD TASK</button>
         </form>
