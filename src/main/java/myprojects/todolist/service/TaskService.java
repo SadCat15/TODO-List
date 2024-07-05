@@ -16,22 +16,25 @@ import java.util.List;
 public class TaskService {
     private final TasksRepository tasksRepository;
 
-    public void saveTask(Task task){
+    public void saveTask(Task task) {
         tasksRepository.save(task);
     }
-    public List<Task> findAll(){
+
+    public List<Task> findAll() {
         return tasksRepository.findAll();
     }
-    public boolean isDataBaseEmpty(){
+
+    public boolean isDataBaseEmpty() {
         return tasksRepository.count() == 0;
     }
-    public void deleteStartTask(){
-        if (tasksRepository.findById(1L).isPresent()) {
-            tasksRepository.deleteById(1L);
-        }
-    }
-    public void createStartTask(){
+
+    public Task createStartTask() {
         Task task = new Task("Make Your first task", "Click on ADD NEW TASK to create a new task");
-        saveTask(task);
+        return task;
+    }
+
+    public void deleteTaskById(Long id) {
+        if (tasksRepository.findById(id).isPresent())
+            tasksRepository.deleteById(id);
     }
 }

@@ -5,12 +5,9 @@ function addTask() {
 function back() {
     window.location.href = "/";
 }
-function deleteTask(element){
-    const id = element.getAttribute('data-argument');
-    toggleStrikethrough(id);
-}
 
-function toggleStrikethrough(id) {
+function deleteTask(element) {
+    const id = element.getAttribute('data-argument');
     let setElement = document.querySelector(`.todo[data-set="${id}"]`);
     let nameElement = setElement.querySelector('.taskName');
     let checkboxElement = setElement.querySelector('.checkbox');
@@ -24,5 +21,12 @@ function toggleStrikethrough(id) {
         nameElement.style.display = 'none';
         checkboxElement.style.display = 'none';
         descriptionElement.style.display = 'none';
+        deleteTaskFromDB(id)
     }, 2000);
+}
+
+function deleteTaskFromDB(id) {
+    fetch(`/api/delete${id}`, {
+        method: 'DELETE'
+    });
 }

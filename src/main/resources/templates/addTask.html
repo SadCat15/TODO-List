@@ -12,7 +12,7 @@
     </div>
     <div id="content">
         <button onclick="back()">BACK to TODO</button>
-        <form method="post" th:action="@{/addTask}">
+        <form method="post" th:action="@{/api/addTask}">
             <input id="nameInput" name="name" placeholder="Topic" type="text">
             <textarea id="descriptionInput" type="text" placeholder="Description" name="description"></textarea>
             <button type="submit">ADD TASK</button>

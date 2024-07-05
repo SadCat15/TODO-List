@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/")
@@ -17,9 +19,10 @@ public class HomeController {
     private final TaskService taskService;
 
     @GetMapping("/")
-    private String index(Model model) {
-        if(taskService.isDataBaseEmpty()){
+    protected String index(Model model) {
+        if (taskService.isDataBaseEmpty()) {
             taskService.createStartTask();
+//            model.addAttribute("tasks", );
         }
         model.addAttribute("tasks", taskService.findAll());
         return "index";
@@ -31,10 +34,9 @@ public class HomeController {
     }
 
     @PostMapping("/addTask")
-    private String createTask(@RequestParam("name") String name, @RequestParam("description") String  description) {
+    private String createTask(@RequestParam("name") String name, @RequestParam("description") String description) {
         Task task = new Task(name, description);
         taskService.saveTask(task);
-        taskService.deleteStartTask();
         return "redirect:/";
     }
 }
