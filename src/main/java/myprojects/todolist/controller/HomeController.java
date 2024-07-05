@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/")
@@ -22,7 +19,6 @@ public class HomeController {
     @GetMapping("/")
     protected String index(Model model) {
         if (taskService.isDataBaseEmpty()) {
-//            List<Task> initialTask = List.of(taskService.createStartTask());
              model.addAttribute("tasks", taskService.createStartTask());
         } else {
             model.addAttribute("tasks", taskService.findAll());
