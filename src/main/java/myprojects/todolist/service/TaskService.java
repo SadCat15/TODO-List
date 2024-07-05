@@ -29,7 +29,7 @@ public class TaskService {
     }
 
     public Task createStartTask() {
-        Task task = new Task("Make Your first task", "Click on ADD NEW TASK to create a new task");
+        Task task = new Task(1L, "Make Your first task", "Click on ADD NEW TASK to create a new task");
         return task;
     }
 
