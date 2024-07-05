@@ -30,6 +30,7 @@ body {
 .todo {
     display: flex;
     flex-wrap: wrap;
+    margin: 7px;
 }
 
 .checkbox {
@@ -79,7 +80,7 @@ body {
     font-size: 18px;
     margin-left: 45px;
     margin-top: 4px;
-    margin-bottom: 7px;
+    /*margin-bottom: 7px;*/
 }
 
 .descprition.strikethrough {

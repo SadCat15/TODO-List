@@ -33,8 +33,7 @@ public class HomeController {
 
     @PostMapping("/addTask")
     private String createTask(@RequestParam("name") String name, @RequestParam("description") String description) {
-        Task task = new Task(name, description);
-        taskService.saveTask(task);
+        taskService.saveTask(new Task(name, description));
         return "redirect:/";
     }
 }
