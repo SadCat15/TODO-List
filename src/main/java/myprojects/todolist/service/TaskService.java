@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,11 +45,12 @@ public class TaskService {
         if (task.getName().isBlank() && task.getDescription().isBlank())
             throw new TaskException("Task's title and description can't be blank", "Set title or description of your task");
         else if (task.getName().isBlank()) {
-            String[] words = task.getDescription().split(" ");
+            String[] words = task.getDescription().split("\\s+");
+            for (String word : words) ;
             int descriptionLength = words.length;
-            int splitPoint = Math.min(descriptionLength / 2, 7);
-            task.setName(Arrays.stream(words, 0, splitPoint).collect(Collectors.joining("\\s+")).trim());
-            task.setDescription(Arrays.stream(words, splitPoint, descriptionLength).collect(Collectors.joining("\\s+")).trim());
+            int splitPoint = Math.min((descriptionLength / 2) + 1, 7);
+            task.setName(Arrays.stream(words, 0, splitPoint).collect(Collectors.joining(" ")).trim());
+            task.setDescription(Arrays.stream(words, splitPoint, descriptionLength).collect(Collectors.joining(" ")).trim());
         }
         if (task.getName().length() > 255)
             throw new TaskException("Title too long", "Title is too long. Max length is 255 charakters.");
