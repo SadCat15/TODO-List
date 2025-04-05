@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/")
+
 public class HomeController {
     private final TaskService taskService;
 
@@ -17,8 +18,10 @@ public class HomeController {
     protected String index(Model model) {
         if (taskService.isDataBaseEmpty()) {
             taskService.createStartTask();
+            model.addAttribute("tasks", taskService.createStartTask());
+        } else {
+            model.addAttribute("tasks", taskService.findAll());
         }
-        model.addAttribute("tasks", taskService.findAll());
         return "index";
     }
 
