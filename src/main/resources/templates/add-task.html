@@ -12,14 +12,19 @@
     </div>
     <div id="content">
         <button onclick="back()">BACK to TODO</button>
-        <form method="post" th:action="@{/api/addTask}">
-            <input id="nameInput" name="name" placeholder="Topic" type="text">
-            <textarea id="descriptionInput" type="text" placeholder="Description" name="description"></textarea>
-            <button type="submit">ADD TASK</button>
+        <form class="add-task-from">
+            <label >
+                <input  class="nameInput" name="name" placeholder="Topic" type="text">
+            </label>
+            <label>
+                <textarea class="descriptionInput" type="text" placeholder="Description" name="description"></textarea>
+            </label>
+            <button class="submit">ADD TASK</button>
         </form>
     </div>
 </div>
 <script src="../js/stars.js"></script>
+<script src="../js/add-task.js"></script>
 <script src="../js/script.js"></script>
 </body>
 </html>

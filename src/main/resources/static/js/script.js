@@ -1,5 +1,5 @@
 function addTask() {
-    window.location.href = "/addTask";
+    window.location.href = "/add-task";
 }
 
 function back() {

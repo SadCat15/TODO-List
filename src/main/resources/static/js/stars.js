@@ -9,8 +9,3 @@ function createStar() {
     star.style.top = getRandomInt(20, window.innerHeight - 20) + 'px';
     document.body.appendChild(star);
 }
-
-for (let i = 0; i < 50; i++) {
-    console.log("gwiazda");
-    createStar();
-}
