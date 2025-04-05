@@ -14,8 +14,10 @@ public class RestController {
     private final TaskService taskService;
 
     @DeleteMapping("/delete{id}")
-    private void deleteTask(@PathVariable Long id){
+    private ResponseEntity<String> deleteTask(@PathVariable Long id)
+    {
         taskService.deleteTaskById(id);
+        return ResponseEntity.status(200).body("Task deleted");
     }
 
     @PostMapping("/add-task")

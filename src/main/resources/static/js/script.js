@@ -28,5 +28,12 @@ function deleteTask(element) {
 function deleteTaskFromDB(id) {
     fetch(`/api/delete${id}`, {
         method: 'DELETE'
-    });
+    })
+        .then(response => {
+            if (response.status !== 200)
+                throw new Error(`Error: Status code ${response.status}`)
+        })
+        .catch(error => {
+            console.error(error)
+        })
 }
