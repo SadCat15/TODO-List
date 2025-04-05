@@ -158,3 +158,17 @@ button:hover {
 .tmp {
     width: calc(100% - 26px);
 }
+
+.error-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    color: #fff;
+    padding: 20px;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    display: none;
+    z-index: 1000;
+}
