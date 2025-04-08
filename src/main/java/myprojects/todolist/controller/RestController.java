@@ -1,6 +1,7 @@
 package myprojects.todolist.controller;
 
 import lombok.RequiredArgsConstructor;
+import myprojects.todolist.exception.TaskException;
 import myprojects.todolist.model.Task;
 import myprojects.todolist.service.TaskService;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,11 @@ public class RestController {
 
     @PostMapping("/add-task")
         private ResponseEntity<String> createTask(@RequestParam("name") String name, @RequestParam("description") String description) {
-        Task task = new Task(name, description);
-        taskService.saveTask(task);
+        try{
+        taskService.saveTask(new Task(name, description));
         return ResponseEntity.status(201).body("Task created");
+        } catch (TaskException e){
+            return ResponseEntity.status(400).body(e.getUserMessage());
+        }
     }
 }

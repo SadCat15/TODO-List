@@ -18,10 +18,20 @@ form.addEventListener('submit', function (event) {
         .then(response => {
             if (response.status === 201)
                 window.location.href = window.location.origin;
-            else
-                throw new Error(`Error: Status code ${response.status}`);
+            else // error
+                response.text().then(err => showErrorMessage(err));
+
         })
-        .catch(error => {
-            console.error(error);
-        });
+        .catch(err => console.error(err));
 });
+
+function showErrorMessage(message){
+    const errorDiv = document.querySelector('.error-message');
+    errorDiv.innerText = message;
+    errorDiv.style.display = 'block';
+
+    setTimeout(() => {
+        errorDiv.style.display = 'none';
+        errorDiv.innerText = "";
+    }, 2000)
+}
