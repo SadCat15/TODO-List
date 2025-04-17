@@ -33,7 +33,7 @@ public class RestController {
     }
 
     @PostMapping("/register-user")
-    private ResponseEntity<String> saveUser(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("password") String password) {
+    private ResponseEntity<String> registerUser(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("repeatedPassword") String repeatedPassword) {
         try {
             userService.registerUser(email, name, password);
             return ResponseEntity.status(200).body("User registered");
