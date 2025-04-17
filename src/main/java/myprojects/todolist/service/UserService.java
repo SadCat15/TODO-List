@@ -6,12 +6,15 @@ import myprojects.todolist.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.logging.Logger;
+
 @RequiredArgsConstructor
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final static Logger logger = Logger.getLogger("a");
 
     public void saveUser(User user) {
         userRepository.save(user);
@@ -26,6 +29,7 @@ public class UserService {
                 "USER"
                 );
         encodePassword(user);
+        logger.info(user.toString());
         saveUser(user);
     }
 
