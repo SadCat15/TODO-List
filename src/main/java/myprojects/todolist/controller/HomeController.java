@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     private final TaskService taskService;
 
-    @GetMapping("/")
+    @GetMapping("/tasks")
     protected String index(Model model) {
         if (taskService.isDataBaseEmpty()) {
             taskService.createStartTask();
@@ -28,5 +28,15 @@ public class HomeController {
     @GetMapping("/add-task")
     private String addTask() {
         return "add-task";
+    }
+
+    @GetMapping("/registration")
+    private String registration() {
+        return "registration";
+    }
+
+    @GetMapping("/login")
+    private String login(){
+        return "login";
     }
 }
