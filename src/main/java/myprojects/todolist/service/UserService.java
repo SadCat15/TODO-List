@@ -2,6 +2,7 @@ package myprojects.todolist.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import myprojects.todolist.dto.UserDto;
 import myprojects.todolist.model.User;
 import myprojects.todolist.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,24 +22,21 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void registerUser(String email, String name, String password){
-        User user = new User(
+    public void registerUser(UserDto userDto) {
+        saveUser(new User(
                 null,
-                email,
-                name,
-                password,
+                userDto.getEmail(),
+                userDto.getName(),
+                encodePassword(userDto.getPassword()),
                 "USER"
-                );
-        encodePassword(user);
-        logger.info(user.toString());
-        saveUser(user);
+        ));
     }
 
-    public User findUserById(Long id){
+    public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found with id = " + id));
     }
 
-    private void encodePassword(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    private String encodePassword(String password) {
+        return passwordEncoder.encode(password);
     }
 }
