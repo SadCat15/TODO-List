@@ -15,20 +15,20 @@ public class Task {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
+    private String title;
     private String description;
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Task(String name, String description) {
-        this.name = name;
+    public Task(String title, String description) {
+        this.title = title;
         this.description = description;
     }
 
-    public Task(Long id, String name, String description){
+    public Task(Long id, String title, String description){
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.description = description;
     }
 }
