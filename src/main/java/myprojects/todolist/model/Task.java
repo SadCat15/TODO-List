@@ -21,9 +21,10 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Task(String title, String description) {
+    public Task(String title, String description, User user) {
         this.title = title;
         this.description = description;
+        this.user = user;
     }
 
     public Task(Long id, String title, String description){
