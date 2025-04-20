@@ -1,9 +1,10 @@
 package myprojects.todolist.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import myprojects.todolist.exception.TaskException;
+import myprojects.todolist.dto.TaskDto;
 import myprojects.todolist.model.Task;
 import myprojects.todolist.repository.TasksRepository;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,19 @@ import java.util.stream.Collectors;
 @Setter
 public class TaskService {
     private final TasksRepository tasksRepository;
+    private final UserService userService;
 
-    public void saveTask(Task task) throws TaskException {
-        validateTask(task);
+    public void saveTask(Task task) {
         tasksRepository.save(task);
+    }
+
+    public void saveTaskDto(TaskDto taskDto) {
+        fillMissingNameIfNeeded(taskDto);
+        saveTask(new Task(
+                taskDto.getTitle(),
+                taskDto.getDescription(),
+                userService.findUserById(taskDto.getUserId())
+        ));
     }
 
     public List<Task> findAll() {
@@ -40,20 +50,13 @@ public class TaskService {
         if (tasksRepository.findById(id).isPresent()) tasksRepository.deleteById(id);
     }
 
-    public void validateTask(Task task) throws TaskException {
-        if (task.getTitle().isBlank() && task.getDescription().isBlank())
-            throw new TaskException("Task's title and description can't be blank", "Set title or description of your task");
-        else if (task.getTitle().isBlank()) {
+    public void fillMissingNameIfNeeded(TaskDto task) {
+        if (task.getTitle().isBlank()) {
             String[] words = task.getDescription().split("\\s+");
-            for (String word : words) ;
             int descriptionLength = words.length;
             int splitPoint = Math.min((descriptionLength / 2) + 1, 7);
             task.setTitle(Arrays.stream(words, 0, splitPoint).collect(Collectors.joining(" ")).trim());
             task.setDescription(Arrays.stream(words, splitPoint, descriptionLength).collect(Collectors.joining(" ")).trim());
         }
-        if (task.getTitle().length() > 255)
-            throw new TaskException("Title too long", "Title is too long. Max length is 255 charakters.");
-        if (task.getDescription().length() > 255)
-            throw new TaskException("Description too long", "Desription is too long. Max length is 255 charakters.");
     }
 }

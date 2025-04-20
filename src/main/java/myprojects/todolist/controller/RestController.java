@@ -1,8 +1,10 @@
 package myprojects.todolist.controller;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import myprojects.todolist.dto.TaskDto;
 import myprojects.todolist.exception.TaskException;
-import myprojects.todolist.model.Task;
 import myprojects.todolist.service.TaskService;
 import myprojects.todolist.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +25,12 @@ public class RestController {
     }
 
     @PostMapping("/add-task")
-    private ResponseEntity<String> createTask(@RequestParam("name") String name, @RequestParam("description") String description) {
+    private ResponseEntity<String> createTask(@Valid @RequestBody TaskDto taskDto) {
         try {
-            taskService.saveTask(new Task(name, description));
+            taskService.saveTaskDto(taskDto);
             return ResponseEntity.status(201).body("Task created");
-        } catch (TaskException e) {
-            return ResponseEntity.status(400).body(e.getUserMessage());
+        } catch (EntityNotFoundException ex) {
+            return ResponseEntity.status(400).body(ex.getMessage());
         }
     }
 
