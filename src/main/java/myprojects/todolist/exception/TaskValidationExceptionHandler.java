@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class TaskValidationExceptionHandler {
 
     @ExceptionHandler(TaskException.class)
-    public ResponseEntity<String> handleTaskException(TaskException ex){
+    public ResponseEntity<String> handleTaskException(TaskException ex) {
         return ResponseEntity.status(400).body(ex.getUserMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public void handleTaskDtoExcpetion(MethodArgumentNotValidException ex) throws TaskException {
+    public void handleTaskDtoExcpetion(MethodArgumentNotValidException ex) throws TaskException, MethodArgumentNotValidException {
         Object target = ex.getBindingResult().getTarget();
         if (!(target instanceof TaskDto)) {
-            return;
+            throw ex;
         }
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             String field = error.getField();
