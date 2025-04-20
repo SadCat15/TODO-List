@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import myprojects.todolist.dto.TaskDto;
+import myprojects.todolist.dto.UserDto;
 import myprojects.todolist.exception.TaskException;
 import myprojects.todolist.service.TaskService;
 import myprojects.todolist.service.UserService;
@@ -35,12 +36,8 @@ public class RestController {
     }
 
     @PostMapping("/register-user")
-    private ResponseEntity<String> registerUser(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("repeatedPassword") String repeatedPassword) {
-        try {
-            userService.registerUser(email, name, password);
-            return ResponseEntity.status(200).body("User registered");
-        } catch (Exception e) {
-            return ResponseEntity.status(400).body(e.getMessage());
-        }
+    private ResponseEntity<String> registerUser(@Valid @RequestBody UserDto userDto) {
+        userService.registerUser(userDto);
+        return ResponseEntity.status(200).body("User registered");
     }
 }
