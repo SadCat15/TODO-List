@@ -1,5 +1,6 @@
 package myprojects.todolist.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import myprojects.todolist.model.User;
 import myprojects.todolist.repository.UserRepository;
@@ -31,6 +32,10 @@ public class UserService {
         encodePassword(user);
         logger.info(user.toString());
         saveUser(user);
+    }
+
+    public User findUserById(Long id){
+        return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found with id = " + id));
     }
 
     private void encodePassword(User user){
