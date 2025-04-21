@@ -11,6 +11,8 @@ import myprojects.todolist.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.logging.Logger;
+
 @org.springframework.web.bind.annotation.RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -18,6 +20,7 @@ public class RestController {
 
     private final TaskService taskService;
     private final UserService userService;
+    private final static Logger logger = Logger.getLogger("users_logger");
 
     @DeleteMapping("/delete{id}")
     private ResponseEntity<String> deleteTask(@PathVariable Long id) {
@@ -37,6 +40,7 @@ public class RestController {
 
     @PostMapping("/register-user")
     private ResponseEntity<String> registerUser(@Valid @RequestBody UserDto userDto) {
+        logger.info(userDto.toString());
         userService.registerUser(userDto);
         return ResponseEntity.status(200).body("User registered");
     }

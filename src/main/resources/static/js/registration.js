@@ -2,27 +2,30 @@ const form = document.querySelector('.registration-form');
 
 form.addEventListener("submit", function (event) {
     event.preventDefault();
-    const name = document.querySelector('#username').value;
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-    const repeatedPassword = document.querySelector('#repeat-password').value;
+    const name = document.querySelector('#username').value || "";
+    const email = document.querySelector('#email').value || "";
+    const password = document.querySelector('#password').value || "";
+    const repeatedPassword = document.querySelector('#repeat-password').value || "";
 
-    const params = new URLSearchParams()
-    params.append('name', name);
-    params.append('email', email);
-    params.append('password', password);
-    params.append('repeatedPassword', repeatedPassword);
-
+    const userDto = {
+        id: null,
+        name: name,
+        email: email,
+        password: password,
+        repeatedPassword: repeatedPassword,
+        role: null
+    };
     fetch('/api/register-user', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
-        body: params.toString()
+        body: JSON.stringify(userDto)
     })
         .then(async response => {
             if (response.status === 200)
-                window.location.href = window.location.origin;
+                // window.location.href = window.location.origin;
+                console.log("USER")
             else // error
                 throw new Error(await response.text())
         })
