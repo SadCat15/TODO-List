@@ -1,5 +1,6 @@
 package myprojects.todolist.dto;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
@@ -10,7 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@PasswordMatches
 public class UserDto {
     @Null(message = "ID field should be null")
     private Long id;
@@ -25,4 +25,9 @@ public class UserDto {
     private String repetedPassword;
     @Null(message = "ROLE field should be null")
     private String role;
+
+    @AssertTrue(message = "Passwords must match")
+    public boolean isPasswordsMatching(){
+        return password.equals(repetedPassword) && password != null;
+    }
 }
