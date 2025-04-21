@@ -7,6 +7,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestControllerAdvice
 public class TaskValidationExceptionHandler {
 
@@ -16,28 +19,28 @@ public class TaskValidationExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public void handleTaskDtoExcpetion(MethodArgumentNotValidException ex) throws TaskException, MethodArgumentNotValidException {
+    public ResponseEntity<?> handleTaskDtoExcpetion(MethodArgumentNotValidException ex) throws TaskException, MethodArgumentNotValidException {
         Object target = ex.getBindingResult().getTarget();
-        if (!(target instanceof TaskDto)) {
-            throw ex;
-        }
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            String field = error.getField();
-            String code = error.getCode();
+        if ((target instanceof TaskDto)) {
+            for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+                String field = error.getField();
+                String code = error.getCode();
 
-            if ("valid".equals(code)) {
-                throw new TaskException("Task's title and description can't be blank", "Set title or description of your task");
-            }
-            if ("title".equals(field)) {
-                if ("Size".equals(code)) {
-                    throw new TaskException("Title too long", "Title is too long. Max length is 255 charakters.");
+                if ("valid".equals(code)) {
+                    throw new TaskException("Task's title and description can't be blank", "Set title or description of your task");
                 }
-            }
-            if ("description".equals(field)) {
-                if ("Size".equals(code)) {
-                    throw new TaskException("Description too long", "Description is too long. Max length is 255 charakters.");
+                if ("title".equals(field)) {
+                    if ("Size".equals(code)) {
+                        throw new TaskException("Title too long", "Title is too long. Max length is 255 charakters.");
+                    }
+                }
+                if ("description".equals(field)) {
+                    if ("Size".equals(code)) {
+                        throw new TaskException("Description too long", "Description is too long. Max length is 255 charakters.");
+                    }
                 }
             }
         }
+        return ResponseEntity.status(400).body(ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage());
     }
 }
