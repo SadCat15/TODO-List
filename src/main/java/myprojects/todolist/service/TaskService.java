@@ -34,16 +34,14 @@ public class TaskService {
         ));
     }
 
-    public List<Task> findAll() {
-        return tasksRepository.findAll();
-    }
-
-    public boolean isDataBaseEmpty() {
-        return tasksRepository.count() == 0;
-    }
-
-    public Task createStartTask() {
-        return new Task(1L, "Make Your first task", "Click on ADD NEW TASK to create a new task");
+    public void createDefaultTask(Long userId) {
+        TaskDto taskDto = new TaskDto(
+                null,
+                "Create new task",
+                "Click ADD NEW TASK and plan your feature",
+                userId
+        );
+        saveTaskDto(taskDto);
     }
 
     public void deleteTaskById(Long id) {
@@ -58,5 +56,9 @@ public class TaskService {
             task.setTitle(Arrays.stream(words, 0, splitPoint).collect(Collectors.joining(" ")).trim());
             task.setDescription(Arrays.stream(words, splitPoint, descriptionLength).collect(Collectors.joining(" ")).trim());
         }
+    }
+
+    public List<Task> getTasksByUserId(Long userId) {
+        return tasksRepository.findAllByUserId(userId);
     }
 }
