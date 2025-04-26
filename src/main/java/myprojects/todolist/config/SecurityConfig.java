@@ -1,5 +1,6 @@
 package myprojects.todolist.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,7 +14,11 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final CustomSuccesLoginHandler succesLoginHandler;
+    private final CustomFailureLoginHandler failureLoginHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -36,13 +41,14 @@ public class SecurityConfig {
                                 "/login",
                                 "/registration")
                         .permitAll()
-                        .requestMatchers("/tasks").hasAnyAuthority("USER")
+                        .requestMatchers("/tasks").hasAuthority("USER")
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(login -> login
                         .loginPage("/login")
-                        .defaultSuccessUrl("/tasks", true)
+                        .successHandler(succesLoginHandler)
+                        .failureHandler(failureLoginHandler)
                         .permitAll()
                 )
                 .logout(logout -> logout
