@@ -1,9 +1,7 @@
 package myprojects.todolist.controller;
 
 import lombok.RequiredArgsConstructor;
-import myprojects.todolist.service.TaskService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,17 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 
 public class HomeController {
-    private final TaskService taskService;
 
     @GetMapping("/tasks")
-    protected String index(Model model) {
-        if (taskService.isDataBaseEmpty()) {
-            taskService.createStartTask();
-            model.addAttribute("tasks", taskService.createStartTask());
-        } else {
-            model.addAttribute("tasks", taskService.findAll());
-        }
-        return "index";
+    protected String index() {
+        return "tasks";
     }
 
     @GetMapping("/add-task")
