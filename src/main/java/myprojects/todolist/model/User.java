@@ -44,7 +44,6 @@ public class User {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", tasks=" + tasks +
                 '}';
     }
 }
