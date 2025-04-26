@@ -44,4 +44,14 @@ public class RestController {
         userService.registerUser(userDto);
         return ResponseEntity.status(200).body("User registered");
     }
+
+    @GetMapping("/get-current-user-id")
+    public ResponseEntity<String> currentUserId() {
+        try {
+            Long id = userService.getCurrentUserId();
+            return ResponseEntity.status(200).body(String.valueOf(id));
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(400).body(ex.getMessage());
+        }
+    }
 }
