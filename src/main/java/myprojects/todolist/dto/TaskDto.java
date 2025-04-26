@@ -1,9 +1,6 @@
 package myprojects.todolist.dto;
 
-import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +15,7 @@ public class TaskDto {
     private String title;
     @Size(max = 255)
     private String description;
-    @NotBlank(message = "User ID must be not emplty")
+    @NotNull(message = "User ID must be not emplty")
     private Long userId;
 
     @AssertTrue(message = "Task's title and description can't be blank")
