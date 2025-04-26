@@ -5,12 +5,14 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import myprojects.todolist.dto.TaskDto;
 import myprojects.todolist.dto.UserDto;
-import myprojects.todolist.exception.TaskException;
+import myprojects.todolist.model.Task;
 import myprojects.todolist.service.TaskService;
 import myprojects.todolist.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @org.springframework.web.bind.annotation.RestController
@@ -53,5 +55,18 @@ public class RestController {
         } catch (RuntimeException ex) {
             return ResponseEntity.status(400).body(ex.getMessage());
         }
+    }
+
+    @GetMapping("/tasks")
+    public ResponseEntity<List<TaskDto>> getTasksByUser(@RequestParam Long user_id) {
+        List<Task> tasks = taskService.getTasksByUserId(user_id);
+        logger.info(String.valueOf(tasks.isEmpty()));
+        if (tasks.isEmpty()) {
+            taskService.createInitTask(user_id);
+            tasks = taskService.getTasksByUserId(user_id);
+        }
+        List<TaskDto> tasksDto = new ArrayList<>();
+        for (Task task : tasks) tasksDto.add(new TaskDto(task.getId(), task.getTitle(), task.getDescription(), null));
+        return ResponseEntity.status(200).body(tasksDto);
     }
 }
