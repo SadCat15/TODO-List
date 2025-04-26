@@ -11,17 +11,12 @@
         <h1>TO DO LIST</h1>
     </div>
     <div id="content">
-        <div class="todo" th:each="task : ${tasks}" th:data-set="${task.id}">
-            <div class="checkbox" th:data-argument="${task.id}" onclick="deleteTask(this)"></div>
-            <div class="tmp">
-                <div class="taskName" th:text="${task.getTitle}"></div>
-            </div>
-            <div class="descprition" th:text="${task.description}"></div>
-        </div>
+<!--        genereting task in task.js-->
     </div>
     <button onclick="addTask()">ADD NEW TASK</button>
 </div>
+<script src="../js/tasks.js"></script>
 <script src="../js/stars.js"></script>
-<script src="../js/script.js"></script>
+<script src="../js/delete-tasks.js"></script>
 </body>
 </html>
