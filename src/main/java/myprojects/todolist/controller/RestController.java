@@ -62,7 +62,7 @@ public class RestController {
         List<Task> tasks = taskService.getTasksByUserId(user_id);
         logger.info(String.valueOf(tasks.isEmpty()));
         if (tasks.isEmpty()) {
-            taskService.createInitTask(user_id);
+            taskService.createDefaultTask(user_id);
             tasks = taskService.getTasksByUserId(user_id);
         }
         List<TaskDto> tasksDto = new ArrayList<>();
