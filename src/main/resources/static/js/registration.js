@@ -24,8 +24,7 @@ form.addEventListener("submit", function (event) {
     })
         .then(async response => {
             if (response.status === 200)
-                // window.location.href = window.location.origin;
-                console.log("USER")
+                window.location.href = window.location.origin;
             else // error
                 response.text().then(err => showErrorMessage(err));
         })
