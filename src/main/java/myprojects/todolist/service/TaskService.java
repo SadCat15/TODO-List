@@ -1,16 +1,16 @@
 package myprojects.todolist.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import myprojects.todolist.exception.TaskException;
+import myprojects.todolist.dto.TaskDto;
 import myprojects.todolist.model.Task;
 import myprojects.todolist.repository.TasksRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,42 +19,46 @@ import java.util.stream.Collectors;
 @Setter
 public class TaskService {
     private final TasksRepository tasksRepository;
+    private final UserService userService;
 
-    public void saveTask(Task task) throws TaskException {
-        validateTask(task);
+    public void saveTask(Task task) {
         tasksRepository.save(task);
     }
 
-    public List<Task> findAll() {
-        return tasksRepository.findAll();
+    public void saveTaskDto(TaskDto taskDto) {
+        fillMissingNameIfNeeded(taskDto);
+        saveTask(new Task(
+                taskDto.getTitle(),
+                taskDto.getDescription(),
+                userService.findUserById(taskDto.getUserId())
+        ));
     }
 
-    public boolean isDataBaseEmpty() {
-        return tasksRepository.count() == 0;
-    }
-
-    public Task createStartTask() {
-        return new Task(1L, "Make Your first task", "Click on ADD NEW TASK to create a new task");
+    public void createDefaultTask(Long userId) {
+        TaskDto taskDto = new TaskDto(
+                null,
+                "Create new task",
+                "Click ADD NEW TASK and plan your feature",
+                userId
+        );
+        saveTaskDto(taskDto);
     }
 
     public void deleteTaskById(Long id) {
         if (tasksRepository.findById(id).isPresent()) tasksRepository.deleteById(id);
     }
 
-    public void validateTask(Task task) throws TaskException {
-        if (task.getName().isBlank() && task.getDescription().isBlank())
-            throw new TaskException("Task's title and description can't be blank", "Set title or description of your task");
-        else if (task.getName().isBlank()) {
+    public void fillMissingNameIfNeeded(TaskDto task) {
+        if (task.getTitle().isBlank()) {
             String[] words = task.getDescription().split("\\s+");
-            for (String word : words) ;
             int descriptionLength = words.length;
             int splitPoint = Math.min((descriptionLength / 2) + 1, 7);
-            task.setName(Arrays.stream(words, 0, splitPoint).collect(Collectors.joining(" ")).trim());
+            task.setTitle(Arrays.stream(words, 0, splitPoint).collect(Collectors.joining(" ")).trim());
             task.setDescription(Arrays.stream(words, splitPoint, descriptionLength).collect(Collectors.joining(" ")).trim());
         }
-        if (task.getName().length() > 255)
-            throw new TaskException("Title too long", "Title is too long. Max length is 255 charakters.");
-        if (task.getDescription().length() > 255)
-            throw new TaskException("Description too long", "Desription is too long. Max length is 255 charakters.");
+    }
+
+    public List<Task> getTasksByUserId(Long userId) {
+        return tasksRepository.findAllByUserId(userId);
     }
 }

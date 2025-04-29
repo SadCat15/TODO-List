@@ -11,7 +11,7 @@ function deleteTask(element) {
     let setElement = document.querySelector(`.todo[data-set="${id}"]`);
     let nameElement = setElement.querySelector('.taskName');
     let checkboxElement = setElement.querySelector('.checkbox');
-    let descriptionElement = setElement.querySelector('.descprition');
+    let descriptionElement = setElement.querySelector('.description');
 
     nameElement.classList.toggle('strikethrough');
     checkboxElement.classList.toggle('strikethrough');

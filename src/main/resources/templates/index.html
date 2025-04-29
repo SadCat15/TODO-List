@@ -1,27 +1,16 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TODO List by Michał Grzona</title>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="../css/background.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<div id="container">
-    <div id="header">
-        <h1>TO DO LIST</h1>
-    </div>
-    <div id="content">
-        <div class="todo" th:each="task : ${tasks}" th:data-set="${task.id}">
-            <div class="checkbox" th:data-argument="${task.id}" onclick="deleteTask(this)"></div>
-            <div class="tmp">
-                <div class="taskName" th:text="${task.name}"></div>
-            </div>
-            <div class="descprition" th:text="${task.description}"></div>
-        </div>
-    </div>
-    <button onclick="addTask()">ADD NEW TASK</button>
+<div>
+    <button>SIGN IN</button>
+    <button>SIGN UP</button>
 </div>
 <script src="../js/stars.js"></script>
-<script src="../js/script.js"></script>
 </body>
 </html>

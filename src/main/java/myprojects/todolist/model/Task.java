@@ -1,8 +1,6 @@
 package myprojects.todolist.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,11 +15,30 @@ public class Task {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
+    private String title;
     private String description;
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Task(String name, String description) {
-        this.name = name;
+    public Task(String title, String description, User user) {
+        this.title = title;
         this.description = description;
+        this.user = user;
+    }
+
+    public Task(Long id, String title, String description){
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
