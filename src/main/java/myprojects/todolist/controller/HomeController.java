@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @GetMapping("/tasks")
-    protected String index() {
+    protected String tasks() {
         return "tasks";
     }
 
@@ -27,7 +27,12 @@ public class HomeController {
     }
 
     @GetMapping("/login")
-    private String login(){
+    private String login() {
         return "login";
+    }
+
+    @GetMapping("/home")
+    private String index() {
+        return "index";
     }
 }
