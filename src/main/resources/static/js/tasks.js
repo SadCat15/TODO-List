@@ -33,7 +33,7 @@ async function main() {
                 <div class="tmp">
                     <div class="taskName">${task.title}</div>
                 </div>
-                <div class="descprition">${task.description}</div>
+                <div class="description">${task.description}</div>
             </div>`;
             })
         })
