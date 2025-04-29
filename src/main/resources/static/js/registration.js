@@ -27,9 +27,18 @@ form.addEventListener("submit", function (event) {
                 // window.location.href = window.location.origin;
                 console.log("USER")
             else // error
-                throw new Error(await response.text())
+                response.text().then(err => showErrorMessage(err));
         })
         .catch(err => console.error(err));
 });
 
-console.log("hello")
+function showErrorMessage(message) {
+    const errorDiv = document.querySelector('.error-message');
+    errorDiv.innerText = message;
+    errorDiv.style.display = 'block';
+
+    setTimeout(() => {
+        errorDiv.style.display = 'none';
+        errorDiv.innerText = "";
+    }, 2000)
+}
