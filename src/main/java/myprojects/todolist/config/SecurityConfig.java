@@ -39,9 +39,13 @@ public class SecurityConfig {
                                 "/js/**",
                                 "/api/**",
                                 "/login",
-                                "/registration")
+                                "/registration",
+                                "/home")
                         .permitAll()
-                        .requestMatchers("/tasks").hasAuthority("USER")
+                        .requestMatchers(
+                                "/tasks",
+                                "/add-task")
+                        .hasAuthority("USER")
                         .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
@@ -52,9 +56,13 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/logout?logout")
+                        .logoutSuccessUrl("/home")
                         .permitAll()
-                );
+                )
+                .exceptionHandling(exception -> exception.
+                        authenticationEntryPoint((request, response, authException) ->
+                                response.sendRedirect("/home"))
+                        .accessDeniedPage("/home"));
         return http.build();
     }
 }
