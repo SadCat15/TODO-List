@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>TODO List by Michał Grzona</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/background.css">
+    <link rel="stylesheet" type="text/css" href="../css/tasks.css">
 </head>
 <body>
 <div id="container">
@@ -13,7 +14,12 @@
     <div id="content">
         <!--        genereting task in task.js-->
     </div>
-    <button onclick="addTask()">ADD NEW TASK</button>
+    <div id="buttons-handler">
+        <form action="/logout" method="post" id="logout">
+            <button>LOGOUT</button>
+        </form>
+        <button onclick="addTask()">ADD NEW TASK</button>
+    </div>
 </div>
 <script src="../js/tasks.js"></script>
 <script src="../js/stars.js"></script>

@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>User registration</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/background.css">
+    <link rel="stylesheet" type="text/css" href="../css/registration.css">
 </head>
 <body>
 <div class="container">
     <header>
         Registration
     </header>
+    <div class="error-message"></div>
     <form class="registration-form">
         <label for="username">Username</label>
         <input type="text" id="username"/>
 
-        <label for="email">e-mail</label>
+        <label for="email">E-mail</label>
         <input type="text" id="email"/>
 
         <label for="password">Password</label>
-        <input type="text" id="password"/>
+        <input type="password" id="password"/>
 
         <label for="repeat-password">Repeat password</label>
-        <input type="text" id="repeat-password"/>
+        <input type="password" id="repeat-password"/>
 
         <button class="submit">register</button>
     </form>
