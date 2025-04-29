@@ -1,174 +1,28 @@
-html {
-    background-color: #020213;
-    color: #fff;
-    overflow-y: hidden;
-}
-
 body {
-    margin: 0;
-}
-
-#container {
-    width: 40%;
-    margin: 0 auto;
-}
-
-header {
-    text-align: center;
-    font-size: 30px;
-    height: 20%;
-    background-color: #000;
-}
-
-#content {
-    margin: auto;
-    height: 65vh;
-    background-color: #000;
-    overflow-y: scroll;
-}
-
-.todo {
+    /*margin: 0;*/
+    /*background-color: #020213;*/
+    /*color: #fff;*/
     display: flex;
-    flex-wrap: wrap;
-    margin: 7px;
-}
-
-.checkbox {
-    border: #fff 3px solid;
-    width: 20px;
-    height: 20px;
-}
-
-.checkbox:hover {
-    background-color: #fff;
-    transition: 0.2s;
-}
-
-.checkbox.strikethrough {
-    background-color: #fff;
-    animation: hideTask 1s ease 1s forwards;
-}
-
-.taskName {
-    font-size: 24px;
-    margin-left: 10px;
-    position: relative;
-    display: inline-block;
-}
-
-.taskName::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 0;
-    height: 3px;
-    background: #fff;
-    transform: translateY(-50%);
-    transition: width 1s ease;
-}
-
-.taskName.strikethrough::after {
-    width: 100%;
-}
-
-.taskName.strikethrough {
-    animation: hideTask 1s ease 1s forwards;
-}
-
-.descprition {
-    font-size: 18px;
-    margin-left: 45px;
-    margin-top: 4px;
-    /*margin-bottom: 7px;*/
-}
-
-.descprition.strikethrough {
-    animation: hideTask 1.2s ease 0.6s forwards;
-}
-
-@keyframes hideTask {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-.star {
-    border-radius: 50%;
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background-color: white;
-    border: 1px solid black;
-    z-index: -1;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /*gap: 30px;*/
 }
 
 button {
-    margin: 15px 5%;
-    width: 90%;
-    padding: 8px;
-    border: #fff 3px solid;
+    padding: 12px 24px;
+    border: 3px solid #fff;
+    background-color: #000;
     color: #fff;
     border-radius: 15px;
-    background-color: #000;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.2s;
+    margin: 15px;
 }
 
 button:hover {
     background-color: #fff;
     color: #000;
-    transition: 0.2s;
-    font-weight: bold;
-}
-
-#footer {
-    background-color: #000;
-    color: #fff;
-    font-size: 10px;
-    width: 100%;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    margin-bottom: 0;
-}
-
-.nameInput {
-    margin-left: 5%;
-    padding: 4px;
-    border-radius: 15px;
-    border: solid #fff 3px;
-    margin-bottom: 15px;
-    width: 60%;
-    font-size: 20px;
-}
-
-.descriptionInput {
-    margin-left: 5%;
-    width: 90%;
-    height: 35vh;
-    padding: 4px;
-    border: solid #fff 3px;
-    border-radius: 15px;
-    font-size: 16px;
-}
-
-.tmp {
-    width: calc(100% - 26px);
-}
-
-.error-message {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: black;
-    color: #fff;
-    padding: 20px;
-    border: 2px solid #fff;
-    border-radius: 8px;
-    display: none;
-    z-index: 1000;
 }

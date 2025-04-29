@@ -1,0 +1,15 @@
+html {
+    background-color: #020213;
+    color: #fff;
+    height: 100%;
+}
+
+.star {
+    border-radius: 50%;
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: white;
+    border: 1px solid black;
+    z-index: -1;
+}
