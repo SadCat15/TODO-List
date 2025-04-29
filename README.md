@@ -102,7 +102,12 @@ src/main/
 #### Adding new task
 ![img.png](docs/add-task-page.png)
 
-### 👨‍💻 Author
+## 👨‍💻 Author
 **Michał Grzona**  
-📖 Student of Computer Science   
-📫 Contact: Michal.Grzona777@gmail.com
+📖 Student of Computer Science at Bydgoszcz University od Science and Tehcnology  
+📫 Contact: Michal.Grzona777@gmail.com  
+💻 My [GitHub](https://github.com/SadCat15)
+
+## 📄 License
+
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
